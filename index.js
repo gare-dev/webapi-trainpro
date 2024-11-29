@@ -40,6 +40,7 @@ app.post("/login", async (req, res) => {
       code: "200",
       message: "Conta logada com sucesso.",
       email: user.email,
+      nome: result[0].nome,
     });
     return;
   }
@@ -67,7 +68,7 @@ app.post("/meusTreinos", async (req, res) => {
 });
 
 app.post("/cadastroTreino", async (req, res) => {
-  const treinos = req.body; // Recebe o array de objetos.
+  const treinos = req.body;
 
   if (!Array.isArray(treinos)) {
     return res.status(400).json({
