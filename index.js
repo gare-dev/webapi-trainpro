@@ -67,6 +67,25 @@ app.post("/meusTreinos", async (req, res) => {
   });
 });
 
+app.post("/excluirTreino", async (req, res) => {
+  const treino = req.body;
+
+  const result = await db.excluirTreino(treino);
+
+  if (result) {
+    res.status(201).json({
+      code: "201",
+      message: "Treino excluido com sucesso.",
+    });
+    return;
+  }
+
+  res.status(500).json({
+    code: "500",
+    message: "Não foi possível excluir o treino.",
+  });
+});
+
 app.post("/cadastroTreino", async (req, res) => {
   const treinos = req.body;
 

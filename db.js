@@ -75,9 +75,24 @@ async function listaTreinos(user) {
   return false;
 }
 
+async function excluirTreino(treino) {
+  const value = [treino.nome, treino.email];
+  const response = await client.query(
+    "DELETE FROM treinos WHERE nome = ? and usuario_id = ?",
+    value
+  );
+
+  if (response[0].affectedRows >= 1) {
+    return true;
+  }
+
+  return false;
+}
+
 module.exports = {
   cadastrarCliente,
   loginCliente,
   cadastroTreino,
   listaTreinos,
+  excluirTreino,
 };
