@@ -33,6 +33,15 @@ async function loginCliente(usuario) {
 }
 
 async function cadastroTreino(treinos) {
+
+  const valuesCheck = [treinos[0].nome, treinos[0].user]
+  const response = await client.query("select * from treinos where nome = ? and usuario_id = ?", valuesCheck)
+
+  if(response[0].length >= 1){
+    return false
+  }
+    
+
   try {
     for (const treino of treinos) {
       const values = [

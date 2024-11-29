@@ -79,6 +79,13 @@ app.post("/cadastroTreino", async (req, res) => {
 
   const result = await db.cadastroTreino(treinos);
 
+  if(!result){
+    res.status(400).json({
+      code: "400",
+      message: "Já existe um treino com esse mesmo nome."
+    })
+  }
+
   if (result) {
     res.status(201).json({
       code: "200",
